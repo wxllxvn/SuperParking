@@ -1,0 +1,96 @@
+@charset "UTF-8";
+/*Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*geral*/
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --main-color: #A6A197;
+    --color-header: #F2E527;
+    --register-color: #D9B504;
+    --font-logo: 'Acme', sans-serif;
+    --font-main: 'Exo', sans-serif;
+}
+
+/*Header*/
+
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: var(--color-header);
+    height: 110px;
+}
+
+header div h1{
+    font-family: var(--font-logo);
+    font-size: 60px;
+
+}
+
+header nav{
+    width: 100%;
+}
+
+header nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    list-style: none;
+    
+}
+
+header nav ul li a{
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 5px;
+}
+
+/*Main*/
+
+main{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--main-color);
+    height: calc(100vh - 110px);
+}
+
+
+main div.container{
+    width: 95%;
+    background-color: var(--register-color);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#form{
+    width: 100%;
+}
+.register{
+    width: 100%;
+    border: 1px solid black;
+}
+
+.register tr{
+    display: flex;
+    justify-content: space-around;
+}
+
+.register tr th{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
