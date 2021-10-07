@@ -10,6 +10,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="modal-register">
+        <h2>Preencha os dados</h2>
+        <div class="modal-row">
+            <div>
+                <label for="name">Nome</label>
+                <input type="text" id="name">
+            </div>
+            <div>
+                <label for="telefone">Telefone</label>
+                <input type="tel" id="telefone">
+            </div>
+        </div>
+        <div class="modal-row">
+            <div>
+                <label for="placa">placa</label>
+                <input type="text" id="placa">
+            </div>
+            <div>
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo">
+            </div>
+        </div>
+        <div class="modal-button">
+            <button>cancelar</button>
+            <button>registrar</button>
+        </div>
+    </div>
+
 
     <header>
         <div class="logo">
@@ -28,8 +56,6 @@
             <h2>Registros</h2>
 
             <button id="createRegistro">Criar Registro</button>
-
-            <form id="form">
                 <table class="register">
 
                     <tr>
@@ -54,9 +80,10 @@
                     </tr>
                 
                 </table>
-            </form>
         </div>
     </main>
+
+
 
     <!--
     <footer>

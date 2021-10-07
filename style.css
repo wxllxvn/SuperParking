@@ -15,6 +15,7 @@
     --main-color: #A6A197;
     --color-header: #F2E527;
     --register-color: #D9B504;
+    --modal-color: #735702;
     --font-logo: 'Acme', sans-serif;
     --font-main: 'Exo', sans-serif;
 }
@@ -63,7 +64,6 @@ main{
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    background-color: var(--main-color);
     height: calc(100vh - 110px);
 }
 
@@ -76,21 +76,82 @@ main div.container{
     flex-direction: column;
     align-items: center;
 }
-#form{
-    width: 100%;
-}
+
 .register{
     width: 100%;
-    border: 1px solid black;
+    text-align: center;
 }
 
 .register tr{
     display: flex;
-    justify-content: space-around;
+    width: 100%;
 }
 
-.register tr th{
+.register tr th, .register tr td{
     display: flex;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    width: 100%;
 }
+
+button{
+    margin: 5px;
+    padding: 5px;
+    font-weight: 600;
+    font-family: var(--font-main);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+.register tr td button:first-child{
+    background-color: blue;
+}
+
+.register tr td button:last-child{
+    background-color: red;
+}
+
+#createRegistro{
+    background-color: green;
+}
+
+
+/*Modal*/
+
+.modal-register{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--modal-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px;
+    border-radius: 25px 0px 20px 20px;
+    z-index: 99999;
+}
+
+.modal-register h2{
+    text-transform: uppercase;
+    margin: 8px;
+}
+
+
+.modal-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.modal-row div{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-row div input{
+    margin-right: 8px;
+    
+}
+
