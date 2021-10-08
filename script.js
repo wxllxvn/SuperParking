@@ -9,8 +9,11 @@ window.onload = function(){
         modal.classList.add("open-modal")
     });
 
+
     const closeModal = () =>{
         modal.classList.remove("open-modal")
+        clearInputsModal()
+
     }
 
     buttonCloseModal.addEventListener("click", () =>{
@@ -20,6 +23,20 @@ window.onload = function(){
     buttonCancelModal.addEventListener("click", () =>{
         closeModal()
     })
+
+    const clearInputsModal = () => {
+        let modalNome = document.getElementById("nome")
+        let modalTelefone = document.getElementById("telefone")
+        let modalPlaca = document.getElementById("placa")
+        let modalModelo = document.getElementById("modelo")
+        console.log(modalNome)
+        modalNome.value = ""
+        modalTelefone.value = ""
+        modalPlaca.value = ""
+        modalModelo.value = ""
+    }
+
+
 
     
 

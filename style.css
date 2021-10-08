@@ -202,6 +202,10 @@ button{
     padding: 10px;
 }
 
+.modal input::-webkit-inner-spin-button{
+    display: none;
+}
+
 #modal-close{
     position: absolute;
     top: 0;
