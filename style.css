@@ -20,6 +20,15 @@
     --font-main: 'Exo', sans-serif;
 }
 
+
+body{
+    font-family: var(--font-main);
+}
+
+button{
+    cursor: pointer;
+}
+
 /*Header*/
 
 header{
@@ -33,7 +42,7 @@ header{
 }
 
 header div h1{
-    font-family: var(--font-logo);
+    font-family: var(--font-logo)!important;
     font-size: 60px;
 
 }
@@ -119,39 +128,103 @@ button{
 
 /*Modal*/
 
-.modal-register{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--modal-color);
-    display: flex;
+
+#modal-container{
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, .5);
+    display: none;
     align-items: center;
     justify-content: center;
+}
+
+.modal{
+    position: relative;
+    background-color: var(--register-color);
+    padding: 40px;
+    width: 50%;
+    min-width: 300px;
+    display: flex;
     flex-direction: column;
-    padding: 50px;
-    border-radius: 25px 0px 20px 20px;
-    z-index: 99999;
+    border-radius: 20px 5px 20px 35px;
+    animation-duration: .3s;
+    animation-name: modal;
 }
-
-.modal-register h2{
-    text-transform: uppercase;
-    margin: 8px;
+.modal h1{
+    text-align: center;
 }
-
 
 .modal-row{
+    width: 100%;
     display: flex;
-    flex-direction: row;
 }
 
 .modal-row div{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .modal-row div input{
-    margin-right: 8px;
-    
+    width: 98%;
+    height: 35px;
+    outline: none;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+}
+
+.modal div label{
+    font-size: 17px;
+    padding: 8px;
+}
+
+.modal-button{
+    display: flex;
+    justify-content: right;
+    margin-top: 8px;
+}
+
+.modal-button button:first-child{
+    background-color: red;
+}
+
+.modal-button button:last-child{
+    background-color: green;
+}
+
+.modal-button button{
+    font-size: 17px;
+    padding: 10px;
+}
+
+#modal-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    font-size: 17px;
+    border: none;
+}
+
+.open-modal{
+    display: flex !important;
+}
+
+
+@keyframes modal{
+    from{
+        margin-bottom: 50px;
+    }
+
+    to{
+        margin-bottom: 0;
+    }
 }
 
