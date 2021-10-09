@@ -1,3 +1,7 @@
+window.onload = function(){
+    refreshRegistro()
+}
+
 const buttonCreateRegistro = document.getElementById("createRegistro");
 const buttonCloseModal = document.getElementById("modal-close");
 const modal = document.getElementById("modal-container");
@@ -78,14 +82,28 @@ const tempCliente = {
 
 const refreshRegistro = () => {
     const dbClient = getLocalStorage("db_client") 
+    const table = document.getElementById("table-register")
+    const rowsRegister = document.getElementsByClassName("rows-register")
+    table.innerHTML = ''
+    console.log(rowsRegister)
     dbClient.forEach(e => {
-        const row = document.createElement("tr")
-        const content = `<td>${e.nomeCliente}</td> <td>${e.telefoneCliente}</td> <td>${e.horarioCliente}</td> <td>${e.placaCliente}</td> <td>${e.modeloCliente}</td> <td> <button>Editar</button> <button>Finalizar</button> </td>`
-        row.appendChild(content)
-        const table = document.getElementById("table-register").appendChild(row)
+        const row = document.createElement('tr')
+        row.innerHTML = `
+            <td>${e.nomeCliente}</td>
+            <td>${e.telefoneCliente}</td>
+            <td>${e.horarioCliente}</td>
+            <td>${e.placaCliente}</td>
+            <td>${e.modeloCliente}</td>
+            <td>
+                <button>Editar</button>
+                <button>Finalizar</button>
+            </td>
+        `
+        table.appendChild(row)
     });
-}
 
+
+}
 
 const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
     let n = document.getElementById("nome").value

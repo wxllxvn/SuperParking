@@ -37,19 +37,6 @@
                         <th>modelo</th>
                         <th>ações</th>
                     </tr>
-
-                    <tr>
-                        <td>Willian Marques</td>
-                        <td>(11)930960917</td>
-                        <td>11:30</td>
-                        <td>BRA2E19</td>
-                        <td>palio</td>
-                        <td>
-                            <button>Editar</button>
-                            <button>Finalizar</button>
-                        </td>
-                    </tr>
-                
                 </table>
         </div>
     </main>
@@ -60,30 +47,32 @@
         <div class="modal">
             <button id="modal-close">X</button>
             <h1>Preencha os dados</h1>
-            <div class="modal-row">
-                <div>
-                    <label for="nome">Nome</label>
-                    <input type="text" id="nome" autocomplete="none">
+            <form>
+                <div class="modal-row">
+                    <div>
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" autocomplete="none" required >
+                    </div>
+                    <div>
+                        <label for="telefone">Telefone</label>
+                        <input type="number" id="telefone" autocomplete="none" required>
+                    </div>
                 </div>
-                <div>
-                    <label for="telefone">Telefone</label>
-                    <input type="number" id="telefone" autocomplete="none">
+                <div class="modal-row">
+                    <div>
+                        <label for="placa">placa</label>
+                        <input type="text" id="placa" autocomplete="none" required>
+                    </div>
+                    <div>
+                        <label for="modelo">Modelo</label>
+                        <input type="text" id="modelo" autocomplete="none" required>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-row">
-                <div>
-                    <label for="placa">placa</label>
-                    <input type="text" id="placa" autocomplete="none">
+                <div class="modal-button">
+                    <button id="modal-button-cancel">cancelar</button>
+                    <button id="modal-button-registrar">registrar</button>
                 </div>
-                <div>
-                    <label for="modelo">Modelo</label>
-                    <input type="text" id="modelo" autocomplete="none">
-                </div>
-            </div>
-            <div class="modal-button">
-                <button id="modal-button-cancel">cancelar</button>
-                <button id="modal-button-registrar">registrar</button>
-            </div>
+            </form>
         </div>
     </div>
 
