@@ -36,7 +36,27 @@ window.onload = function(){
         modalModelo.value = ""
     }
 
+    //funcitios Register
+    const ConstrutorRegister = (nome, tel, placa, modelo) =>{
+        this.nomeCliente = nome
+        this.telefoneCliente = tel
+        this.placaCliente = placa
+        this.modeloCliente = modelo
+    }
 
+
+    const tempFunc = () =>{
+        let n = document.getElementById("nome")
+        let t = document.getElementById("telefone")
+        let p = document.getElementById("placa")
+        let m = document.getElementById("modelo")
+        const objeto = ConstrutorRegister(n.value, t.value, p.value, m.value)
+        console.log(objeto)
+    }
+
+    const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
+        tempFunc()
+    })
 
     
 
