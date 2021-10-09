@@ -1,67 +1,102 @@
-window.onload = function(){
-    const buttonCreateRegistro = document.getElementById("createRegistro");
-    const buttonCloseModal = document.getElementById("modal-close");
-    const modal = document.getElementById("modal-container");
-    const buttonCancelModal = document.getElementById("modal-button-cancel");
+const buttonCreateRegistro = document.getElementById("createRegistro");
+const buttonCloseModal = document.getElementById("modal-close");
+const modal = document.getElementById("modal-container");
+const buttonCancelModal = document.getElementById("modal-button-cancel");
 
-    //buttons
-    buttonCreateRegistro.addEventListener("click", function(){
-        modal.classList.add("open-modal")
-    });
+var d = new Date();
 
-
-    const closeModal = () =>{
-        modal.classList.remove("open-modal")
-        clearInputsModal()
-
-    }
-
-    buttonCloseModal.addEventListener("click", () =>{
-        closeModal()
-    })
-
-    buttonCancelModal.addEventListener("click", () =>{
-        closeModal()
-    })
-
-    const clearInputsModal = () => {
-        let modalNome = document.getElementById("nome")
-        let modalTelefone = document.getElementById("telefone")
-        let modalPlaca = document.getElementById("placa")
-        let modalModelo = document.getElementById("modelo")
-        console.log(modalNome)
-        modalNome.value = ""
-        modalTelefone.value = ""
-        modalPlaca.value = ""
-        modalModelo.value = ""
-    }
-
-    //funcitios Register
-    const ConstrutorRegister = (nome, tel, placa, modelo) =>{
-        this.nomeCliente = nome
-        this.telefoneCliente = tel
-        this.placaCliente = placa
-        this.modeloCliente = modelo
-    }
+//buttons
+buttonCreateRegistro.addEventListener("click", function(){
+    modal.classList.add("open-modal")
+});
 
 
-    const tempFunc = () =>{
-        let n = document.getElementById("nome")
-        let t = document.getElementById("telefone")
-        let p = document.getElementById("placa")
-        let m = document.getElementById("modelo")
-        const objeto = ConstrutorRegister(n.value, t.value, p.value, m.value)
-        console.log(objeto)
-    }
-
-    const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
-        tempFunc()
-    })
-
-    
-
-    
-
-
+const closeModal = () =>{
+    modal.classList.remove("open-modal")
+    clearInputsModal()
 
 }
+
+buttonCloseModal.addEventListener("click", () =>{
+    closeModal()
+})
+
+buttonCancelModal.addEventListener("click", () =>{
+    closeModal()
+})
+
+const clearInputsModal = () => {
+    let modalNome = document.getElementById("nome")
+    let modalTelefone = document.getElementById("telefone")
+    let modalPlaca = document.getElementById("placa")
+    let modalModelo = document.getElementById("modelo")
+    modalNome.value = ""
+    modalTelefone.value = ""
+    modalPlaca.value = ""
+    modalModelo.value = ""
+}
+
+//funcitios Register
+function ConstrutorRegister(nome, tel, placa, modelo){
+    this.nomeCliente = nome
+    this.telefoneCliente = tel
+    this.placaCliente = placa
+    this.modeloCliente = modelo
+    this.horarioCliente = new Date()
+}
+
+const getLocalStorage = (arr) => JSON.parse(localStorage.getItem(arr)) ?? [];
+const setLocalStorage = (key, arr) => localStorage.setItem(key ,JSON.stringify(arr))
+
+const createRegistro = (register) => {
+    const dbRegister = getLocalStorage("db_client")
+    dbRegister.push(register)
+    setLocalStorage("db_client", dbRegister)
+}
+
+
+const updateRegister = (index, client) => {
+    const dbClient = getLocalStorage("db_client")
+    dbClient[index] = client
+    setLocalStorage("db_client", dbClient)
+}
+
+const deleteRegister = (index) =>{
+    const dbClient = getLocalStorage("db_client") 
+    dbClient.splice(index, 1)
+    setLocalStorage("db_client", dbClient)
+}
+
+
+const tempCliente = {
+    nome: "Solimar Marques Dos Santos",
+    telefone: "11930960917",
+    placa: "brca-1365",
+    modelo: "camaro",
+    horario: "21:30"
+}
+
+const refreshRegistro = () => {
+    const dbClient = getLocalStorage("db_client") 
+    dbClient.forEach(e => {
+        const row = document.createElement("tr")
+        const content = `<td>${e.nomeCliente}</td> <td>${e.telefoneCliente}</td> <td>${e.horarioCliente}</td> <td>${e.placaCliente}</td> <td>${e.modeloCliente}</td> <td> <button>Editar</button> <button>Finalizar</button> </td>`
+        row.appendChild(content)
+        const table = document.getElementById("table-register").appendChild(row)
+    });
+}
+
+
+const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
+    let n = document.getElementById("nome").value
+    let t = document.getElementById("telefone").value
+    let p = document.getElementById("placa").value
+    let m = document.getElementById("modelo").value
+    const newRegister = new ConstrutorRegister(n, t, p, m)
+    createRegistro(newRegister)
+    refreshRegistro()
+})
+
+    
+
+    
