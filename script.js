@@ -1,5 +1,6 @@
 window.onload = function(){
     refreshRegistro()
+
 }
 
 const buttonCreateRegistro = document.getElementById("createRegistro");
@@ -95,8 +96,8 @@ const refreshRegistro = () => {
             <td>${e.placaCliente}</td>
             <td>${e.modeloCliente}</td>
             <td>
-                <button>Editar</button>
-                <button>Finalizar</button>
+                <button class="edit-register">Editar</button>
+                <button class="finish-register">Finalizar</button>
             </td>
         `
         table.appendChild(row)
@@ -105,16 +106,26 @@ const refreshRegistro = () => {
 
 }
 
-const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
+const isValid = () => {
     let n = document.getElementById("nome").value
     let t = document.getElementById("telefone").value
     let p = document.getElementById("placa").value
     let m = document.getElementById("modelo").value
-    const newRegister = new ConstrutorRegister(n, t, p, m)
-    createRegistro(newRegister)
-    refreshRegistro()
-})
+    if (n == '' || t == '' || p == '' || m == ''){
+        return false
+    } else{
+        return true
+    }
+}
 
-    
-
-    
+const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
+    if (isValid()){
+        let n = document.getElementById("nome").value
+        let t = document.getElementById("telefone").value
+        let p = document.getElementById("placa").value
+        let m = document.getElementById("modelo").value
+        const newRegister = new ConstrutorRegister(n, t, p, m)
+        createRegistro(newRegister)
+        refreshRegistro()
+    }
+})   

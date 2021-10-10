@@ -86,21 +86,27 @@ main div.container{
     align-items: center;
 }
 
-.register{
+.register, .register-head{
     width: 100%;
     text-align: center;
 }
 
-.register tr{
+.register tr, .register-head tr{
     display: flex;
     width: 100%;
 }
 
-.register tr th, .register tr td{
+.register-head tr th, .register tr td{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    border-bottom: 1px black solid;
+}
+
+
+.register tr:hover{
+    background-color: var(--color-header);
 }
 
 button{
