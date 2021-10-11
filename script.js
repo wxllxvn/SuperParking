@@ -1,5 +1,6 @@
 window.onload = function(){
     refreshRegistro()
+    btnFinishRegister()
 
 }
 
@@ -89,6 +90,7 @@ const refreshRegistro = () => {
     console.log(rowsRegister)
     dbClient.forEach(e => {
         const row = document.createElement('tr')
+        console.log(e)
         row.innerHTML = `
             <td>${e.nomeCliente}</td>
             <td>${e.telefoneCliente}</td>
@@ -128,4 +130,13 @@ const btnRegistrar = document.getElementById("modal-button-registrar").addEventL
         createRegistro(newRegister)
         refreshRegistro()
     }
-})   
+})  
+
+const btnFinishRegister = () => {
+    const buttonFinish = document.getElementsByClassName("finish-register")
+    for(var i=0 ; i < buttonFinish.length ; i++ ){
+        buttonFinish[i].addEventListener("click", () => {
+            console.log("finalizado")
+        })
+    }
+}
