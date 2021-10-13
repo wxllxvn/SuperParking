@@ -1,6 +1,5 @@
 window.onload = function(){
     refreshRegistro()
-    btnFinishRegister()
 
 }
 
@@ -17,10 +16,10 @@ buttonCreateRegistro.addEventListener("click", function(){
 });
 
 
+
 const closeModal = () =>{
     modal.classList.remove("open-modal")
     clearInputsModal()
-
 }
 
 buttonCloseModal.addEventListener("click", () =>{
@@ -61,10 +60,16 @@ const createRegistro = (register) => {
 }
 
 
-const updateRegister = (index, client) => {
+const updateRegister = (index) => {
     const dbClient = getLocalStorage("db_client")
-    dbClient[index] = client
-    setLocalStorage("db_client", dbClient)
+    modal.classList.add("open-modal")
+    let n = document.getElementById("nome").value
+    let t = document.getElementById("telefone").value
+    let p = document.getElementById("placa").value
+    let m = document.getElementById("modelo").value
+    const newRegister = new ConstrutorRegister(n, t, p, m)
+    const dbNewRegister = dbClient.splice(index, newRegister)
+    setLocalStorage("db_client", dbNewRegister)
 }
 
 const deleteRegister = (index) =>{
@@ -86,11 +91,10 @@ const refreshRegistro = () => {
     const dbClient = getLocalStorage("db_client") 
     const table = document.getElementById("table-register")
     const rowsRegister = document.getElementsByClassName("rows-register")
+    let cont = 0
     table.innerHTML = ''
-    console.log(rowsRegister)
     dbClient.forEach(e => {
         const row = document.createElement('tr')
-        console.log(e)
         row.innerHTML = `
             <td>${e.nomeCliente}</td>
             <td>${e.telefoneCliente}</td>
@@ -98,11 +102,12 @@ const refreshRegistro = () => {
             <td>${e.placaCliente}</td>
             <td>${e.modeloCliente}</td>
             <td>
-                <button class="edit-register">Editar</button>
-                <button class="finish-register">Finalizar</button>
+                <button class="edit-register" id="edit-${cont}">Editar</button>
+                <button class="finish-register" id="finish-${cont}">Finalizar</button>
             </td>
         `
         table.appendChild(row)
+        cont++
     });
 
 
@@ -120,6 +125,17 @@ const isValid = () => {
     }
 }
 
+const editOrFinish = () => {
+    if(event.target.type == "submit"){
+        const dbClient = getLocalStorage("db_client")
+        const [action, index] = event.target.id.split("-")
+
+        if(action == "edit"){
+            updateRegister(index)
+        }
+    }
+}
+
 const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
     if (isValid()){
         let n = document.getElementById("nome").value
@@ -132,11 +148,5 @@ const btnRegistrar = document.getElementById("modal-button-registrar").addEventL
     }
 })  
 
-const btnFinishRegister = () => {
-    const buttonFinish = document.getElementsByClassName("finish-register")
-    for(var i=0 ; i < buttonFinish.length ; i++ ){
-        buttonFinish[i].addEventListener("click", () => {
-            console.log("finalizado")
-        })
-    }
-}
+const btnEditOrFinish = document.querySelector(".register")
+btnEditOrFinish.addEventListener("click", editOrFinish)
