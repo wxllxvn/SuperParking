@@ -7,7 +7,7 @@ const buttonCreateRegistro = document.getElementById("createRegistro");
 const buttonCloseModal = document.getElementById("modal-close");
 const modal = document.getElementById("modal-container");
 const buttonCancelModal = document.getElementById("modal-button-cancel");
-
+var geralIndex = 0
 var d = new Date();
 
 //buttons
@@ -59,18 +59,47 @@ const createRegistro = (register) => {
     setLocalStorage("db_client", dbRegister)
 }
 
-
-const updateRegister = (index) => {
-    const dbClient = getLocalStorage("db_client")
+const fillFields = (client) => {
+    document.getElementById("nome").value = client.nomeCliente
+    document.getElementById("telefone").value = client.telefoneCliente
+    document.getElementById("placa").value = client.placaCliente
+    document.getElementById("modelo").value = client.modeloCliente
     modal.classList.add("open-modal")
+}
+
+const createEditClient = () => {
     let n = document.getElementById("nome").value
     let t = document.getElementById("telefone").value
     let p = document.getElementById("placa").value
     let m = document.getElementById("modelo").value
-    const newRegister = new ConstrutorRegister(n, t, p, m)
-    const dbNewRegister = dbClient.splice(index, newRegister)
-    setLocalStorage("db_client", dbNewRegister)
+    const registerEdit = new ConstrutorRegister(n, t, p, m)
+    return registerEdit
 }
+
+const returnClient = (index) =>{
+    return getLocalStorage("db_client")[index]
+}
+
+const updateRegister = (index, newClient) => {
+    let client = getLocalStorage("db_client")
+    console.log(client[index])
+    client.splice(index, 1, newClient)
+    console.log(client)
+    setLocalStorage("db_client", client)
+    refreshRegistro()
+}
+
+const editClient = () => {
+    let n = document.getElementById("nome").value
+    let t = document.getElementById("telefone").value
+    let p = document.getElementById("placa").value
+    let m = document.getElementById("modelo").value
+    let finalClient = new ConstrutorRegister(n, t, p, m)
+    return finalClient
+}
+
+
+
 
 const deleteRegister = (index) =>{
     const dbClient = getLocalStorage("db_client") 
@@ -131,20 +160,32 @@ const editOrFinish = () => {
         const [action, index] = event.target.id.split("-")
 
         if(action == "edit"){
-            updateRegister(index)
+            geralIndex = index
+            document.getElementById("nome").dataset.index = "edit"
+            fillFields(returnClient(index))
+            
+            
+
         }
     }
 }
 
 const btnRegistrar = document.getElementById("modal-button-registrar").addEventListener("click", () => {
-    if (isValid()){
-        let n = document.getElementById("nome").value
-        let t = document.getElementById("telefone").value
-        let p = document.getElementById("placa").value
-        let m = document.getElementById("modelo").value
-        const newRegister = new ConstrutorRegister(n, t, p, m)
-        createRegistro(newRegister)
-        refreshRegistro()
+    if(document.getElementById("nome").dataset.index == "register"){
+        if (isValid()){
+            let n = document.getElementById("nome").value
+            let t = document.getElementById("telefone").value
+            let p = document.getElementById("placa").value
+            let m = document.getElementById("modelo").value
+            const newRegister = new ConstrutorRegister(n, t, p, m)
+            createRegistro(newRegister)
+            refreshRegistro()
+            closeModal()
+        }
+    }else{
+        updateRegister(geralIndex, editClient())
+        document.getElementById("nome").dataset.index = "register"
+        closeModal()
     }
 })  
 
