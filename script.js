@@ -90,21 +90,25 @@ const updateRegister = (index, newClient) => {
 }
 
 const editClient = () => {
-    let n = document.getElementById("nome").value
-    let t = document.getElementById("telefone").value
-    let p = document.getElementById("placa").value
-    let m = document.getElementById("modelo").value
-    let finalClient = new ConstrutorRegister(n, t, p, m)
-    return finalClient
+    if(isValid()){
+        let n = document.getElementById("nome").value
+        let t = document.getElementById("telefone").value
+        let p = document.getElementById("placa").value
+        let m = document.getElementById("modelo").value
+        let finalClient = new ConstrutorRegister(n, t, p, m)
+        return finalClient
+    }
 }
 
 
 
 
 const deleteRegister = (index) =>{
+    alert("Comfirmar a finalização do registro?")
     const dbClient = getLocalStorage("db_client") 
     dbClient.splice(index, 1)
     setLocalStorage("db_client", dbClient)
+    refreshRegistro()
 }
 
 
@@ -163,9 +167,8 @@ const editOrFinish = () => {
             geralIndex = index
             document.getElementById("nome").dataset.index = "edit"
             fillFields(returnClient(index))
-            
-            
-
+        }else if(action == "finish"){
+            deleteRegister(index)
         }
     }
 }
@@ -183,9 +186,16 @@ const btnRegistrar = document.getElementById("modal-button-registrar").addEventL
             closeModal()
         }
     }else{
-        updateRegister(geralIndex, editClient())
-        document.getElementById("nome").dataset.index = "register"
-        closeModal()
+        if(isValid()){
+            let n = document.getElementById("nome").value
+            let t = document.getElementById("telefone").value
+            let p = document.getElementById("placa").value
+            let m = document.getElementById("modelo").value
+            let finalClient = new ConstrutorRegister(n, t, p, m)
+            updateRegister(geralIndex, finalClient)
+            document.getElementById("nome").dataset.index = "register"
+            closeModal()
+        }
     }
 })  
 
