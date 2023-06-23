@@ -104,7 +104,7 @@ const editClient = () => {
 
 
 const deleteRegister = (index) =>{
-    alert("Comfirmar a finalização do registro?")
+    alert("Finalizado!")
     const dbClient = getLocalStorage("db_client") 
     dbClient.splice(index, 1)
     setLocalStorage("db_client", dbClient)
